@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 
 interface ThemeContextType {
     theme: string;
@@ -21,17 +21,16 @@ export function ThemeProvider({children}: {children: React.ReactNode}){
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme)=>prevTheme === "light" ? "dark" : "light");
+    setTheme((prev)=>(prev === "light" ? "dark" : "light"));
   };
 
   return <ThemeContext.Provider value={{theme, toggleTheme}}>
     {children}
   </ThemeContext.Provider>
 }
-
 export function useTheme(){
   const context = useContext(ThemeContext);
-  if(!context){
+  if(context === undefined){
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;

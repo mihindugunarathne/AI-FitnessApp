@@ -41,7 +41,7 @@ export const AppProvider = ({children}: {children: React.ReactNode}) => {
   const fetchUser = async (token: string) => {
       const {data} = await mockApi.user.me();
       setUser({...data, token});
-      if(data?.user.age && data?.user?.weight && data?.user?.goal){
+      if(data?.age && data?.weight && data?.goal){
         setOnboardingCompleted(true);
       }
       setIsUserFetched(true);

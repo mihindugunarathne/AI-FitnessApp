@@ -5,6 +5,7 @@ import { useAppContext } from "../context/AppContext";
 import { useEffect } from "react";
 import { MailIcon, LockIcon } from "lucide-react";
 import { EyeIcon } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 
 const Login = () => {
@@ -38,6 +39,7 @@ const Login = () => {
 
   return (
    <>
+    <Toaster />
      <main className="login-page-container">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className="text-3xl font-medium text-gray-900 dark:text-white">
