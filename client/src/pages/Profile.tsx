@@ -8,9 +8,8 @@ import Button from "../components/ui/Button";
 import { goalLabels, goalOptions } from "../assets/assets";
 import Input from "../components/ui/Input";
 import Select from "../components/ui/Select";
-import type { UserData } from "../types";
-import mockApi from "../assets/mockApi";
 import toast from "react-hot-toast";
+import api from "../configs/api";
 
 
 
@@ -51,12 +50,7 @@ const Profile = () => {
 
   const handleSave = async () => {
     try {
-      //Mock API Update
-      const updates: Partial<UserData> = {
-        ...formData,
-        goal: formData.goal as "lose" | "maintain" | "gain",
-      };
-      await mockApi.user.update(user?.id || '', updates);
+      await api.put(`/api/users/${user?.id}`,formData);
       await fetchUser(user?.token || '');
       toast.success('Profile updated successfully');
     } catch (error) {

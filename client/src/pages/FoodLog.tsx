@@ -8,12 +8,14 @@ import { Loader2Icon, PlusIcon, SparkleIcon, TrashIcon, UtensilsCrossedIcon } fr
 import { useRef } from "react";
 import Input from "../components/ui/Input";
 import Select from "../components/ui/Select";
-import mockApi from "../assets/mockApi";
 import toast from "react-hot-toast";
+import api from "../configs/api";
 
 
 
-const FoodLog = () => {
+
+
+const FoodLog = () => { 
 
   const {allFoodLogs, setAllFoodLogs} = useAppContext();
 
@@ -38,21 +40,31 @@ const FoodLog = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const {data} = await mockApi.foodLogs.create({data: formData});
-    setAllFoodLogs(prev => [...prev, data]);
-    setFormData({name: '', calories: 0, mealType: ''});
-    setShowForm(false);
+
+    if(!formData.name.trim() || !formData.calories || formData.calories <= 0 || !formData.mealType) {
+      return toast.error('Please fill in all fields');
+    }
+    
+    try {
+      const {data} = await api.post('/api/food-logs', {data: formData});
+      setAllFoodLogs(prev => [...prev, data]);
+      setFormData({name: '', calories: 0, mealType: ''});
+      setShowForm(false);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.error?.message || error?.message)
+    }  
   }
 
   const handleDelete = async (documentId: string) => {
     try {
       const confirm = window.confirm('Are you sure you want to delete this food entry?');
       if(!confirm) return;
-      await mockApi.foodLogs.delete(documentId);
+      await api.delete(`/api/food-logs/${documentId}`);
       setAllFoodLogs(prev => prev.filter(e => e.documentId !== documentId));
-    } catch (error) {
-      console.error('Error deleting food entry:', error);
-      toast.error(error?.message || 'Failed to delete food entry');
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.error?.message || error?.message)
     } 
   }
 
@@ -81,8 +93,40 @@ const FoodLog = () => {
   const handleImagechange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if(!file) return;
-    //Implement image analysis
-  }
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const { data } = await api.post('/api/image-analysis', formData);
+      const result = data.data ?? data.result;
+      if (!result?.name || !result?.calories) {
+        toast.error('Could not detect food in image. Please try again.');
+        return;
+      }
+
+      let mealType = '';
+      const hour = new Date().getHours();
+      if (hour >= 0 && hour < 12) mealType = 'breakfast';
+      else if (hour >= 12 && hour < 16) mealType = 'lunch';
+      else if (hour >= 16 && hour < 18) mealType = 'snack';
+      else mealType = 'dinner';
+
+      const { data: newEntry } = await api.post('/api/food-logs', {
+        data: { name: result.name, calories: result.calories, mealType },
+      });
+      setAllFoodLogs((prev) => [...prev, newEntry]);
+
+      if(inputRef.current){
+        inputRef.current.value = '';
+      }
+      
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.error?.message || error?.message)
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     (()=>{
@@ -241,12 +285,8 @@ const FoodLog = () => {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default FoodLog
-
-
-
-
 
