@@ -30,62 +30,120 @@ body{
 
 /* Login Page */
 .login-page-container {
-  @apply flex items-center justify-center w-full h-screen px-4 bg-white dark:bg-slate-950 transition-colors duration-200;
+  @apply flex items-center justify-center w-full min-h-screen px-4 py-12 bg-gradient-to-br from-slate-50 via-emerald-50/30 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-200;
+}
+
+.login-card {
+  @apply w-full max-w-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-xl dark:shadow-2xl border border-slate-200/60 dark:border-slate-700/60 p-8 transition-all duration-200;
 }
 
 .login-form {
-  @apply flex w-full flex-col max-w-80;
+  @apply flex w-full flex-col;
 }
 
 .login-input {
-  @apply pl-10 rounded-md ring ring-gray-200 dark:ring-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 outline-none p-2.5 w-full transition-all duration-200;
+  @apply pl-11 rounded-xl border-0 bg-slate-50 dark:bg-slate-800/80 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-emerald-500/50 dark:focus:ring-emerald-400/30 focus:bg-white dark:focus:bg-slate-800 outline-none py-3 w-full transition-all duration-200 shadow-sm;
 }
 
 .login-button {
-  @apply mt-6 py-2.5 w-full rounded-md bg-green-600 text-white transition hover:bg-green-700 disabled:opacity-60 text-sm;
+  @apply mt-6 py-3.5 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 disabled:opacity-60 disabled:shadow-none text-sm transition-all duration-200 active:scale-[0.98];
 }
 
 /* Dashboard Page */
 .dashboard-header {
-  @apply bg-linear-to-br from-emerald-500 to-emerald-600 text-white p-6 pt-12 pb-20 rounded-b-3xl;
+  @apply bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 text-white p-6 pt-12 pb-20 rounded-b-[2rem] shadow-lg shadow-emerald-900/20;
+}
+
+.dashboard-motivation-card {
+  @apply mt-6 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/10;
 }
 
 .dashboard-grid {
-  @apply px-4 -mt-10 space-y-4 lg:grid lg:grid-cols-2 lg:gap-4 lg:px-6 lg:max-w-4xl lg:mx-auto;
+  @apply px-4 -mt-12 space-y-4 lg:grid lg:grid-cols-2 lg:gap-5 lg:px-6 lg:max-w-5xl lg:mx-auto;
 }
 
 .dashboard-card-grid {
   @apply grid grid-cols-2 gap-4 lg:col-span-2;
 }
 
+.dashboard-stat-card {
+  @apply flex flex-col gap-1 p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800/50 dark:to-slate-900/50 border border-slate-100 dark:border-slate-700/50 transition-all hover:shadow-md;
+}
+
 /* Profile Page */
 .profile-content {
-  @apply p-4 lg:p-6 space-y-4 lg:grid grid-cols-2 gap-6;
+  @apply p-4 lg:p-6 space-y-4 lg:grid lg:grid-cols-2 lg:gap-6 lg:max-w-5xl lg:mx-auto;
 }
 
 .profile-info-row {
-  @apply flex items-center gap-4 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg transition-colors duration-200;
+  @apply flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 
+  border border-slate-100 dark:border-slate-700/50 transition-all;
 }
 
-/* Food Log Page */
+/* Food Log & Activity Log Pages */
+.page-header-accent {
+  @apply bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 p-6 pt-12 transition-colors duration-200;
+}
+
+.quick-add-pill {
+  @apply px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
+  bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 
+  text-slate-700 dark:text-slate-200 hover:scale-[1.02] active:scale-[0.98];
+}
+
 .food-entry-item {
-  @apply flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-xl transition-colors duration-200;
+  @apply flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 
+  border border-slate-100 dark:border-slate-700/50 transition-all hover:shadow-sm;
 }
 
-/* Activity Log Page */
 .activity-entry-item {
-  @apply flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-xl transition-colors duration-200;
+  @apply flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 
+  border border-slate-100 dark:border-slate-700/50 transition-all hover:shadow-sm;
+}
+
+.empty-state-card {
+  @apply text-center py-16 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-700 
+  bg-slate-50/50 dark:bg-slate-800/30;
+}
+
+.ai-button {
+  @apply w-full bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 
+  text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all;
 }
 
 /* Onboarding Page */
 .onboarding-container {
-  @apply min-h-screen bg-linear-to-b from-emerald-50 to-white dark:from-slate-900 dark:to-slate-950 flex flex-col transition-colors duration-200;
+  @apply min-h-screen bg-gradient-to-b from-slate-50 via-emerald-50/40 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex flex-col transition-colors duration-200;
 }
 
 .onboarding-wrapper {
-  @apply w-full lg:max-w-5xl mx-auto;
+  @apply w-full lg:max-w-2xl mx-auto px-4;
+}
+
+.onboarding-progress-step {
+  @apply flex items-center gap-2 flex-1 transition-all duration-300;
+}
+
+.onboarding-progress-bar {
+  @apply h-2 flex-1 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-800 transition-all duration-500;
+}
+
+.onboarding-progress-fill {
+  @apply h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500;
+}
+
+.onboarding-step-card {
+  @apply bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-3xl border border-slate-200/60 dark:border-slate-700/60 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 p-6 lg:p-8 transition-all duration-200;
 }
 
 .onboarding-option-btn {
-  @apply w-full p-3 pl-5 rounded-xl border text-left border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-200 cursor-pointer;
+  @apply w-full p-4 pl-5 rounded-2xl border-2 text-left border-slate-200 dark:border-slate-700 
+  bg-white dark:bg-slate-800/50 hover:border-emerald-300 dark:hover:border-emerald-600/50 
+  hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 
+  transition-all duration-200 cursor-pointer active:scale-[0.99];
+}
+
+.onboarding-option-btn.selected {
+  @apply border-emerald-500 dark:border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 
+  ring-2 ring-emerald-500/30 dark:ring-emerald-400/30;
 }

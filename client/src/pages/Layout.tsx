@@ -8,9 +8,9 @@ const Layout = () => {
   return (
     <div className="layout-container">
       <Sidebar />
-      <div className="flex-1 overflow-y-scroll">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden overscroll-behavior-contain">
         <Outlet />
-      </div>
+      </main>
       <BottomNav />
     </div>
   )

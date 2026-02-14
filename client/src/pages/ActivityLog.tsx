@@ -89,122 +89,155 @@ const ActivityLog = () => {
 
   return (
     <div className="page-container">
-      {/*Header*/}
       <div className="page-header">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Activity Log</h1>
+            <h1 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight">Activity Log</h1>
             <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Track your workouts</p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-slate-500 dark:text-slate-400">Activity Total</p>
-            <p className="text-xl font-bold text-blue-600 dark:text-blue-400">{totalMinutes} min</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Activity total</p>
+            <p className="text-xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">{totalMinutes} min</p>
           </div>
         </div>
       </div>
 
       <div className="page-content-grid">
-        {/* Quick Add Section */}
         {!showForm && (
           <div className="space-y-4">
-            <Card>
-              <h3 className="font-semibold text-slate-700 dark:text-slate-200 mb-3">Quick Add</h3>
+            <Card className="shadow-sm">
+              <h3 className="font-semibold text-slate-800 dark:text-white mb-3">Quick add</h3>
               <div className="flex flex-wrap gap-2">
-                {quickActivities.map((activity)=>(
-                  <button onClick={()=>handleQuickAdd(activity)} key={activity.name} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl
-                   text-sm text-slate-600 dark:text-slate-300 transition-colors">
-                    {activity.emoji} {activity.name}
+                {quickActivities.map((item) => (
+                  <button
+                    type="button"
+                    onClick={() => handleQuickAdd(item)}
+                    className="quick-add-pill"
+                    key={item.name}
+                  >
+                    {item.emoji} {item.name}
                   </button>
                 ))}
               </div>
             </Card>
-            <Button type="button" className="w-full" onClick={()=>setShowForm(true)}>
+            <Button type="button" className="w-full" onClick={() => setShowForm(true)}>
               <PlusIcon className="size-5" />
-              Add Custom Activity
+              Add custom activity
             </Button>
           </div>
         )}
 
-        {/* Add Form*/}
         {showForm && (
-          <Card className="border-2 border-blue-200 dark:border-blue-800">
-            <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-4">New Activity</h3>
+          <Card className="border-2 border-blue-200 dark:border-blue-800 shadow-lg shadow-blue-500/5">
+            <h3 className="font-semibold text-slate-800 dark:text-white mb-4">New activity</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <Input label="Activity Name" placeholder="e.g. Morning Run" value={formData.name} 
-              onChange={(v)=>setFormData({...formData, name: v.toString()})} required />
+              <Input
+                label="Activity name"
+                placeholder="e.g. Morning run"
+                value={formData.name}
+                onChange={(v) => setFormData({ ...formData, name: v.toString() })}
+                required
+              />
               <div className="flex gap-4">
-                <Input label="Duration (min)" className="flex-1" placeholder="e.g. 30" min={1} max={300}
-                value={formData.duration} onChange={handleDurationChange} required />
-
-                <Input label="Calories Burned" placeholder="e.g. 300" className="flex-1" min={1} max={2000}
-                 value={formData.calories} onChange={(v)=>setFormData({...formData, calories: Number(v)})} required />
+                <Input
+                  label="Duration (min)"
+                  className="flex-1"
+                  placeholder="e.g. 30"
+                  min={1}
+                  max={300}
+                  value={formData.duration}
+                  onChange={handleDurationChange}
+                  required
+                />
+                <Input
+                  label="Calories burned"
+                  placeholder="e.g. 300"
+                  className="flex-1"
+                  min={1}
+                  max={2000}
+                  value={formData.calories}
+                  onChange={(v) => setFormData({ ...formData, calories: Number(v) })}
+                  required
+                />
               </div>
               {error && <p className="text-red-500 text-sm">{error}</p>}
               <div className="flex pt-2 gap-2">
-              <Button type="button" variant="secondary" className="flex-1" onClick={()=>{
-                setShowForm(false); 
-                setError(''); 
-                setFormData({name: '', duration: 0, calories: 0});}}>Cancel</Button>
-              <Button type="submit" className="flex-1">Add Activity</Button>
-              </div>    
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={() => {
+                    setShowForm(false);
+                    setError('');
+                    setFormData({ name: '', duration: 0, calories: 0 });
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" className="flex-1">
+                  Add activity
+                </Button>
+              </div>
             </form>
           </Card>
         )}
 
-        {/* Activities List*/}
         {activity.length === 0 ? (
-          <Card className="text-center py-12">
-            <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800
-             flex items-center justify-center mx-auto mb-4">
-              <DumbbellIcon className="w-8 h-8 text-slate-400 dark:text-slate-500"/>
+          <Card className="empty-state-card col-span-2">
+            <div className="size-20 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-5">
+              <DumbbellIcon className="size-10 text-slate-400 dark:text-slate-500" />
             </div>
             <h3 className="font-semibold text-slate-700 dark:text-slate-200 mb-2">No activities logged today</h3>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">Start moving and track your progress</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mx-auto">Start moving and track your progress</p>
           </Card>
         ) : (
-          <Card>
-            <div className="flex items-center mb-4 gap-3">
-              <div>
-                <ActivityIcon className="size-5 text-blue-600"/>
-              </div>
-              <div>
-                <h3 className="font-semibold text-slate-800 dark:text-white">Today's Activities</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{activity.length} logged</p>
+          <Card className="lg:col-span-2">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="size-11 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                  <ActivityIcon className="size-5 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-800 dark:text-white">Today&apos;s activities</h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{activity.length} logged</p>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-4">
-              {activity.map((activity)=>(
-                <div key={activity.id} className="activity-entry-item">
+            <div className="space-y-3">
+              {activity.map((item) => (
+                <div key={item.id} className="activity-entry-item">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-blue-100 
-                      dark:bg-blue-900/20 flex items-center justify-center">
-                      <TimerIcon className="size-5 text-blue-500 dark:text-blue-400"/>
+                    <div className="size-11 rounded-2xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
+                      <TimerIcon className="size-5 text-blue-500 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p>{activity.name}</p>
-                      <p>{new Date(activity?.createdAt || '')
-                       .toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit'})}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-200">{item.name}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        {new Date(item?.createdAt || '').toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
-                      <p className="font-semibold text-slate-700 dark:text-slate-200">{activity.duration} min</p>
-                      <p className="text-xs text-slate-400">{activity.calories} kcal</p>
+                      <p className="font-semibold text-slate-700 dark:text-slate-200 tabular-nums">{item.duration} min</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">{item.calories} kcal</p>
                     </div>
-                    <button onClick={()=>handleDelete(activity.documentId)} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 
-                      dark:hover:bg-red-900/20 rounded-lg transition-colors">
-                      <Trash2Icon className="w-4 h-4" />
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(item.documentId)}
+                      className="p-2.5 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors"
+                    >
+                      <Trash2Icon className="size-4" />
                     </button>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Total Summary*/}
-            <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-              <span className="text-slate-500 dark:text-slate-400">Total Active Time</span>
-              <span className="text-lg font-bold text-slate-600 dark:text-slate-400">{totalMinutes} minutes</span>
+            <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">Total active time</span>
+              <span className="text-lg font-bold text-slate-700 dark:text-slate-200 tabular-nums">{totalMinutes} min</span>
             </div>
           </Card>
         )}

@@ -35,7 +35,7 @@ const Onboarding = () => {
   const handleNext = async () => {
     if(step === 1) {
      if(!formData.age || Number(formData.age) < 13 || Number(formData.age) > 120) {
-      return toast('Age is required')
+      return toast.error('Please enter a valid age (13–120)')
      }
     }
     if(step < totalSteps) {
@@ -55,9 +55,9 @@ const Onboarding = () => {
         toast.success('Profile updated successfully')
         setOnboardingCompleted(true)
         fetchUser(user?.token || '')
-      } catch (error: any) {
-        console.log(error);
-        toast.error(error.message);   
+      } catch (error) {
+        console.error(error);
+        toast.error(error instanceof Error ? error.message : 'Failed to save profile');
       }
     }
   }
@@ -66,156 +66,193 @@ const Onboarding = () => {
     <>
       <Toaster />
       <div className="onboarding-container">
-        {/*Header*/}
-        <div className="p-6 pt-12 onboarding-wrapper">
+        {/* Header */}
+        <div className="pt-10 pb-6 onboarding-wrapper">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500">
-              <PersonStanding className="h-6 w-6 text-white" />
+            <div className="size-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <PersonStanding className="size-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-white">FitTrack</h1>
-          </div> 
-          <p className="text-slate-500 dark:text-slate-400 mt-4">Let's personalize your experience</p>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="px-6 mb-8 onboarding-wrapper">
-          <div className="flex gap-2 max-w-2xl">
-            {[1,2,3].map((s)=>(
-            <div key={s} className={`h-1.5 flex-1 rounded-full transition-all duration-300
-              ${ s <= step ? "bg-emerald-500" : "bg-slate-200 dark:bg-slate-800"}`}/>
-          ))}
+            <div>
+              <h1 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight">FitTrack</h1>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Let&apos;s personalize your experience</p>
+            </div>
           </div>
-          <p className="text-sm text-slate-400 mt-3">Step {step} of {totalSteps}</p>
-        </div>
-        {/* Form content */}
-        <div className="px-6 flex-1 onboarding-wrapper">
-          {step === 1 && (
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="size-12 flex items-center justify-center 
-                rounded-xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 
-                dark:border-emerald-800"><User className="size-6 text-emerald-600 dark:text-emerald-400" />
-                </div>
-
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-800 dark:text-white">How old are you?</h2>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">This helps us calculate your daily calorie needs</p>
-                </div>
-              </div>
-              <Input label="Age" type="number" max-w-2xl value={formData.age} 
-              onChange={(v) => updateField('age', v)} placeholder="Enter your age" min={13} max={120} required />
-            </div>
-          )}
-
-          {step === 2 && (
-            <div className="space-y-6 onboarding-wrapper">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="size-12 flex items-center justify-center 
-                rounded-xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 
-                dark:border-emerald-800"><ScaleIcon className="size-6 text-emerald-600 dark:text-emerald-400" />
-                </div>
-
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-800 dark:text-white">Your measurements</h2>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">Help us track your progress</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 max-w-2xl">
-               <Input label="Weight (kg)" type="number" value={formData.weight} 
-               onChange={(v) => updateField('weight', v)} placeholder="Enter your weight" min={20} max={300} required /> 
-               <Input label="Height (cm) - optional" type="number" value={formData.height} 
-               onChange={(v) => updateField('height', v)} placeholder="Enter your height" min={100} max={250} /> 
-              </div>    
-            </div>
-          )}
-
-          {/* Step 3 */}
-          {step === 3 && (
-            <div className="space-y-6 onboarding-wrapper">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="size-12 flex items-center justify-center 
-                rounded-xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 
-                dark:border-emerald-800">
-                <Target className="size-6 text-emerald-600 dark:text-emerald-400" />
-                </div>
-
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-800 dark:text-white">What is your goal?</h2>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">We'll tailor your experience</p>
-                </div>
-              </div> 
-              {/* Options */}
-              <div className="space-y-4 max-w-lg">
-                {goalOptions.map((option)=>(
-                  <button 
-                  key={option.value}
-                  onClick={() => {
-                    const age = Number(formData.age);
-                    const range = ageRanges.find((r) => age <= r.max) || ageRanges[ageRanges.length - 1];
-                    
-                    let intake = range.maintain;
-                    let burn = range.burn;
-
-                    if(option.value === 'lose') {
-                      intake -= 400;
-                      burn += 100;
-                    } else if(option.value === 'gain') {
-                      intake += 400;
-                      burn -= 100;
-                    }
-
-                    setFormData({
-                      ...formData, 
-                      goal: option.value as "lose" | "maintain" | "gain", 
-                      dailyCalorieIntake: intake, 
-                      dailyCalorieBurn: burn 
-                    })
-                  }}
-                  className={`onboarding-option-btn ${formData.goal === option.value &&
-                  'ring-2 ring-emerald-500'}`}>
-                    <span className="text-base text-slate-700 dark:text-slate-200">{option.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="border-t border-slate-200 dark:border-slate-700 my-6 max-w-lg">
-              {/* Daily Targets */}
-              <div className="space-y-8 max-w-lg">
-                <h3 className="text-md font-medium text-slate-800 dark:text-white">daily Targets</h3>
-
-                <div className="">
-                  <Slider label="Daily Calorie Intake" min={120} max={4000} step={50}
-                  value={formData.dailyCalorieIntake} onChange={(v) => updateField('dailyCalorieIntake', v)}
-                  unit="kcal" infoText="The total calories you plan to consume each day." />
-
-                  <Slider label="Daily Calorie Burn" min={100} max={2000} step={50}
-                  value={formData.dailyCalorieBurn} onChange={(v) => updateField('dailyCalorieBurn', v)}
-                  unit="kcal" infoText="The total calories you aim to burn through exercise and daily activity each day." />
-                </div>
-              </div>
-              </div>
-            </div>
-          )}          
         </div>
 
-        {/*Navigation buttons*/}
-        <div className="p-6 pb-10 onboarding-wrapper">
-          <div className="flex gap-3 lg:justify-end">
+        {/* Progress */}
+        <div className="onboarding-wrapper mb-6">
+          <div className="flex items-center gap-2">
+            {[1, 2, 3].map((s) => (
+              <div key={s} className="onboarding-progress-step">
+                <div className="onboarding-progress-bar">
+                  <div
+                    className="onboarding-progress-fill"
+                    style={{ width: s <= step ? '100%' : '0%' }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">Step {step} of {totalSteps}</p>
+        </div>
+
+        {/* Form content in card */}
+        <div className="onboarding-wrapper flex-1 pb-6">
+          <div className="onboarding-step-card">
+            {step === 1 && (
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
+                    <User className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-800 dark:text-white">How old are you?</h2>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">We use this to calculate your daily calorie needs</p>
+                  </div>
+                </div>
+                <Input
+                  label="Age"
+                  type="number"
+                  className="max-w-md"
+                  value={formData.age}
+                  onChange={(v) => updateField('age', v)}
+                  placeholder="e.g. 28"
+                  min={13}
+                  max={120}
+                  required
+                />
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
+                    <ScaleIcon className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-800 dark:text-white">Your measurements</h2>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">Help us track your progress over time</p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-5 max-w-md">
+                  <Input
+                    label="Weight (kg)"
+                    type="number"
+                    value={formData.weight}
+                    onChange={(v) => updateField('weight', v)}
+                    placeholder="e.g. 70"
+                    min={20}
+                    max={300}
+                    required
+                  />
+                  <Input
+                    label="Height (cm)"
+                    type="number"
+                    value={formData.height}
+                    onChange={(v) => updateField('height', v)}
+                    placeholder="Optional — e.g. 175"
+                    min={100}
+                    max={250}
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
+                    <Target className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-800 dark:text-white">What is your goal?</h2>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">We&apos;ll tailor your daily targets</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  {goalOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => {
+                        const age = Number(formData.age);
+                        const range = ageRanges.find((r) => age <= r.max) || ageRanges[ageRanges.length - 1];
+                        let intake = range.maintain;
+                        let burn = range.burn;
+                        if (option.value === 'lose') {
+                          intake -= 400;
+                          burn += 100;
+                        } else if (option.value === 'gain') {
+                          intake += 400;
+                          burn -= 100;
+                        }
+                        setFormData({
+                          ...formData,
+                          goal: option.value as "lose" | "maintain" | "gain",
+                          dailyCalorieIntake: intake,
+                          dailyCalorieBurn: burn,
+                        });
+                      }}
+                      className={`onboarding-option-btn ${formData.goal === option.value ? 'selected' : ''}`}
+                    >
+                      <span className="text-base font-medium text-slate-700 dark:text-slate-200">{option.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700">
+                  <h3 className="text-base font-semibold text-slate-800 dark:text-white mb-4">Daily targets</h3>
+                  <div className="space-y-6">
+                    <Slider
+                      label="Daily Calorie Intake"
+                      min={120}
+                      max={4000}
+                      step={50}
+                      value={formData.dailyCalorieIntake}
+                      onChange={(v) => updateField('dailyCalorieIntake', v)}
+                      unit="kcal"
+                      infoText="Total calories you plan to consume each day."
+                    />
+                    <Slider
+                      label="Daily Calorie Burn"
+                      min={100}
+                      max={2000}
+                      step={50}
+                      value={formData.dailyCalorieBurn}
+                      onChange={(v) => updateField('dailyCalorieBurn', v)}
+                      unit="kcal"
+                      infoText="Calories you aim to burn through exercise and activity."
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className="onboarding-wrapper pb-10 pt-2">
+          <div className="flex gap-3">
             {step > 1 && (
-              <Button variant="secondary" onClick={() => setStep(step > 1 ? step - 1 : 1)} 
-              className = "max-lg:flex-1 lg:px-10">
+              <Button
+                variant="secondary"
+                onClick={() => setStep(step > 1 ? step - 1 : 1)}
+                className="max-lg:flex-1 lg:px-8"
+              >
                 <span className="flex items-center justify-center gap-2">
-                  <ArrowLeft className="w-5 h-5" />
+                  <ArrowLeft className="size-5" />
                   Back
                 </span>
               </Button>
             )}
-             <Button onClick={handleNext} className="max-lg:flex-1 lg:px-10">
-                <span className="flex items-center justify-center gap-2">
-                  {step === totalSteps ? 'Get Started' : 'Continue'}
-                  <ArrowRight className="w-5 h-5" />
-                </span>
-              </Button>
+            <Button onClick={handleNext} className="flex-1 lg:flex-initial lg:px-10">
+              <span className="flex items-center justify-center gap-2">
+                {step === totalSteps ? 'Get started' : 'Continue'}
+                <ArrowRight className="size-5" />
+              </span>
+            </Button>
           </div>
         </div>
       </div>

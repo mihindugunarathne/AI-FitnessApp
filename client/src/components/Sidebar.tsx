@@ -15,37 +15,45 @@ const Sidebar = () => {
     const {theme, toggleTheme} = useTheme()
   
   return (
-    <nav className="hidden lg:flex flex-col w-64 bg-white dark:bg-slate-900 border-r 
-    border-slate-100 dark:border-slate-800 p-6 transition-colors duration-200">
+    <nav className="hidden lg:flex flex-col w-64 min-h-screen bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 p-6 transition-colors duration-200">
       <div className="flex items-center gap-3 mb-8">
-        <div className="size-10 rounded-xl bg-emerald-500 flex items-center justify-center">
-          <PersonStandingIcon className="size-7 text-white" />
+        <div className="size-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <PersonStandingIcon className="size-6 text-white" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-white">FitTrack</h1>
+        <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">FitTrack</h1>
       </div>
 
-      <div className="flex flex-col gap-2">
-        {navItems.map((item)=>(
-          <NavLink to={item.path} key={item.path} className={({isActive})=>`flex items-center 
-          gap-3 px-4 py-2.5 border-1-3 transition-all duration-200 ${isActive ? 
-          "bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 font-medium" 
-          : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 border-transparent"}`}>
-            <item.icon className="size-5" />
+      <div className="flex flex-col gap-1">
+        {navItems.map((item) => (
+          <NavLink
+            to={item.path}
+            key={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                isActive
+                  ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-semibold"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200"
+              }`
+            }
+          >
+            <item.icon className="size-5 shrink-0" />
             <span className="text-base">{item.label}</span>
           </NavLink>
-      ))}
-    </div>
+        ))}
+      </div>
 
       <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800">
-      <button className="flex items-center gap-3 px-4 py-2.5 w-full text-slate-500 dark:text-slate-400 
-      hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 
-      rounded-lg transition-colors duration-200 cursor-pointer" onClick={toggleTheme}>
-        {theme === 'light' ? <MoonIcon className="size-5" /> : <SunIcon className="size-5" />}
-        <span className="text-base">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
-      </button>
-    </div>
-  </nav>
-);
+        <button
+          type="button"
+          className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200 transition-colors cursor-pointer"
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? <MoonIcon className="size-5 shrink-0" /> : <SunIcon className="size-5 shrink-0" />}
+          <span className="text-base font-medium">{theme === "light" ? "Dark mode" : "Light mode"}</span>
+        </button>
+      </div>
+    </nav>
+  );
 };
 
 export default Sidebar;
