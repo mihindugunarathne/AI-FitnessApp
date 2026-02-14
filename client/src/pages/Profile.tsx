@@ -53,7 +53,7 @@ const Profile = () => {
       await api.put(`/api/users/${user?.id}`,formData);
       await fetchUser(user?.token || '');
       toast.success('Profile updated successfully');
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       toast.error(error?.message || 'Failed to update profile');
     }
