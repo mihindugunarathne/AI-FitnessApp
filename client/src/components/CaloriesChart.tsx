@@ -35,10 +35,10 @@ const CaloriesChart = () => {
     const data = getData();
 
     const isDark = theme === 'dark';
-    const gridColor = isDark ? '#334155' : '#e2e8f0';
+    const gridColor = isDark ? '#1e293b' : '#e2e8f0';
     const tickColor = isDark ? '#94a3b8' : '#64748b';
-    const tooltipBg = isDark ? '#1e293b' : '#fff';
-    const tooltipBorder = isDark ? '#334155' : 'transparent';
+    const tooltipBg = isDark ? '#0f1419' : '#fff';
+    const tooltipBorder = isDark ? '#1e293b' : '#e2e8f0';
 
     return (
         <div className="w-full h-[280px] lg:h-[300px] mt-2">
@@ -59,8 +59,8 @@ const CaloriesChart = () => {
                         labelStyle={{ color: tickColor }}
                     />
                     <Legend iconType="circle" iconSize={8} wrapperStyle={{ paddingTop: '12px' }} />
-                    <Bar dataKey="Intake" fill="#10b981" radius={[6, 6, 0, 0]} barSize={20} name="Intake" />
-                    <Bar dataKey="Burn" fill="#f97316" radius={[6, 6, 0, 0]} barSize={20} name="Burn" />
+                    <Bar dataKey="Intake" fill="#14b8a6" radius={[6, 6, 0, 0]} barSize={20} name="Intake" />
+                    <Bar dataKey="Burn" fill="#0d9488" radius={[6, 6, 0, 0]} barSize={20} name="Burn" />
                 </BarChart>
             </ResponsiveContainer>
         </div>

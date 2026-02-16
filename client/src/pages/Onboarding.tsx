@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, PersonStanding, ScaleIcon, Target, User } from "lucide-react"
+import { ArrowLeft, ArrowRight, ScaleIcon, Target, User, ZapIcon } from "lucide-react"
 import toast, { Toaster } from "react-hot-toast"
 import { useState } from "react"
 import { useAppContext } from "../context/AppContext"
@@ -69,8 +69,8 @@ const Onboarding = () => {
         {/* Header */}
         <div className="pt-10 pb-6 onboarding-wrapper">
           <div className="flex items-center gap-3 mb-2">
-            <div className="size-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-              <PersonStanding className="size-6 text-white" />
+            <div className="size-11 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30">
+              <ZapIcon className="size-5 text-white" strokeWidth={2.5} />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-800 dark:text-white tracking-tight">FitTrack</h1>
@@ -102,8 +102,8 @@ const Onboarding = () => {
             {step === 1 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
-                    <User className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/30 dark:to-cyan-900/30 flex items-center justify-center border border-teal-200/50 dark:border-teal-700/30">
+                    <User className="size-7 text-teal-600 dark:text-teal-400" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-slate-800 dark:text-white">How old are you?</h2>
@@ -127,8 +127,8 @@ const Onboarding = () => {
             {step === 2 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
-                    <ScaleIcon className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/30 dark:to-cyan-900/30 flex items-center justify-center border border-teal-200/50 dark:border-teal-700/30">
+                    <ScaleIcon className="size-7 text-teal-600 dark:text-teal-400" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-slate-800 dark:text-white">Your measurements</h2>
@@ -162,8 +162,8 @@ const Onboarding = () => {
             {step === 3 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="size-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center border border-emerald-200/50 dark:border-emerald-700/30">
-                    <Target className="size-7 text-emerald-600 dark:text-emerald-400" />
+                  <div className="size-14 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/30 dark:to-cyan-900/30 flex items-center justify-center border border-teal-200/50 dark:border-teal-700/30">
+                    <Target className="size-7 text-teal-600 dark:text-teal-400" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-slate-800 dark:text-white">What is your goal?</h2>

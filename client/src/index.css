@@ -7,8 +7,13 @@
   font-family: "Rethink Sans", sans-serif;
 }
 
-body{
-  @apply dark:bg-slate-950 dark:text-white;
+body {
+  @apply bg-slate-50 text-slate-900;
+}
+
+.dark body {
+  background-color: #0a0e14;
+  color: #ffffff;
 }
 
 /* Shared Page Styles */
@@ -21,7 +26,11 @@ body{
 }
 
 .layout-container {
-  @apply min-h-screen lg:max-h-screen lg:flex bg-white dark:bg-slate-950 transition-colors duration-200;
+  @apply min-h-screen lg:max-h-screen lg:flex bg-white transition-colors duration-200;
+}
+
+.dark .layout-container {
+  background-color: #0a0e14;
 }
 
 .page-content-grid {
@@ -30,7 +39,7 @@ body{
 
 /* Login Page */
 .login-page-container {
-  @apply flex items-center justify-center w-full min-h-screen px-4 py-12 bg-gradient-to-br from-slate-50 via-emerald-50/30 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-200;
+  @apply flex items-center justify-center w-full min-h-screen px-4 py-12 bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-200;
 }
 
 .login-card {
@@ -42,45 +51,931 @@ body{
 }
 
 .login-input {
-  @apply pl-11 rounded-xl border-0 bg-slate-50 dark:bg-slate-800/80 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-emerald-500/50 dark:focus:ring-emerald-400/30 focus:bg-white dark:focus:bg-slate-800 outline-none py-3 w-full transition-all duration-200 shadow-sm;
+  @apply pl-11 rounded-xl border-0 bg-slate-50 dark:bg-slate-800/80 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-teal-500/50 dark:focus:ring-teal-400/30 focus:bg-white dark:focus:bg-slate-800 outline-none py-3 w-full transition-all duration-200 shadow-sm;
 }
 
 .login-button {
-  @apply mt-6 py-3.5 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 disabled:opacity-60 disabled:shadow-none text-sm transition-all duration-200 active:scale-[0.98];
+  @apply mt-6 py-3.5 w-full rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 disabled:opacity-60 disabled:shadow-none text-sm transition-all duration-200 active:scale-[0.98];
 }
 
-/* Dashboard Page */
-.dashboard-header {
-  @apply bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 text-white p-6 pt-12 pb-20 rounded-b-[2rem] shadow-lg shadow-emerald-900/20;
+/* Dashboard Page - Match Image Exactly */
+.dashboard-page {
+  @apply min-h-screen pb-24 lg:pb-6 transition-colors duration-200;
+  background-color: #f8fafc;
 }
 
-.dashboard-motivation-card {
-  @apply mt-6 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/10;
+.dark .dashboard-page {
+  background-color: #0a0e14;
 }
 
-.dashboard-grid {
-  @apply px-4 -mt-12 space-y-4 lg:grid lg:grid-cols-2 lg:gap-5 lg:px-6 lg:max-w-5xl lg:mx-auto;
+.dashboard-content {
+  @apply p-4 lg:p-6 lg:max-w-6xl mx-auto space-y-6;
 }
 
-.dashboard-card-grid {
-  @apply grid grid-cols-2 gap-4 lg:col-span-2;
+/* Welcome Section - unified container with border */
+.welcome-section {
+  @apply p-5 rounded-2xl flex flex-col gap-4;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .welcome-section {
+  background-color: #0f1419;
+  border: 1px solid rgba(20, 184, 166, 0.25);
+}
+
+.welcome-header {
+  @apply flex flex-col;
+}
+
+.welcome-label {
+  @apply text-xs font-medium uppercase tracking-wider mb-1 text-slate-500;
+}
+
+.dark .welcome-label {
+  color: #a0aec0;
+}
+
+.welcome-title {
+  @apply text-2xl lg:text-3xl font-bold tracking-tight text-slate-800;
+}
+
+.dark .welcome-title {
+  color: #ffffff;
+}
+
+/* Inner Daily Goal card */
+.welcome-goal-card {
+  @apply flex items-center justify-between gap-4 flex-wrap p-5 rounded-xl;
+  background-color: #e2e8f0;
+}
+
+.dark .welcome-goal-card {
+  background-color: #141922;
+}
+
+/* Icon: midnight circle with teal lightning + teal ring */
+.welcome-goal-icon {
+  @apply size-12 rounded-full flex items-center justify-center shrink-0;
+  background-color: #0a0e14;
+  border: 2px solid #14b8a6;
+}
+
+.dark .welcome-goal-icon {
+  background-color: #0a0e14;
+}
+
+/* Log Meal button - teal */
+.welcome-log-meal-btn {
+  @apply px-5 py-2.5 rounded-xl font-medium text-sm text-white transition-colors;
+  background-color: #14b8a6;
+}
+
+.welcome-log-meal-btn:hover {
+  background-color: #0d9488;
+}
+
+.dashboard-icon-teal {
+  @apply size-12 rounded-2xl flex items-center justify-center shrink-0;
+  background-color: #14b8a6;
+}
+
+.dashboard-icon-gray {
+  @apply size-12 rounded-xl flex items-center justify-center shrink-0;
+  background-color: #1e293b;
+}
+
+.dashboard-btn-primary {
+  @apply px-5 py-2.5 rounded-xl font-medium text-sm transition-colors text-white;
+  background-color: #14b8a6;
+}
+
+.dashboard-btn-primary:hover {
+  background-color: #0d9488;
+}
+
+/* Middle: Left = Daily Nutrition, Right = Active Minutes + Workouts stacked */
+.dashboard-row-2 {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-4;
+}
+
+.dashboard-nutrition-card {
+  @apply lg:col-span-7 rounded-2xl;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .dashboard-nutrition-card {
+  background-color: #0f1419;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.dashboard-stat-column {
+  @apply flex flex-col gap-4 lg:col-span-5;
 }
 
 .dashboard-stat-card {
-  @apply flex flex-col gap-1 p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800/50 dark:to-slate-900/50 border border-slate-100 dark:border-slate-700/50 transition-all hover:shadow-md;
+  @apply flex flex-col p-5 rounded-2xl;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .dashboard-stat-card {
+  background-color: #0f1419;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.dashboard-realtime-tag {
+  @apply px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider;
+  background-color: rgba(20, 184, 166, 0.2);
+  color: #2dd4bf;
+}
+
+.dashboard-workout-tags {
+  @apply flex gap-3 mt-3 text-xs font-medium uppercase tracking-wider text-slate-500;
+}
+
+.dark .dashboard-workout-tags {
+  color: #a0aec0;
+}
+
+.dashboard-muted {
+  @apply text-slate-500;
+}
+
+.dark .dashboard-muted {
+  color: #a0aec0;
+}
+
+.dashboard-accent {
+  color: #14b8a6;
+}
+
+/* Sidebar - Match Image */
+.sidebar-nav {
+  @apply bg-white border-slate-200;
+}
+
+.dark .sidebar-nav {
+  background-color: #050709;
+  border-color: transparent;
+}
+
+.sidebar-logo {
+  @apply size-11 rounded-2xl flex items-center justify-center;
+  background-color: #14b8a6;
+}
+
+.sidebar-nav-item {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200;
+}
+
+.sidebar-nav-item:not(.sidebar-nav-item-active) {
+  @apply text-slate-500 hover:bg-slate-100;
+}
+
+.dark .sidebar-nav-item:not(.sidebar-nav-item-active) {
+  color: #a0aec0;
+}
+
+.dark .sidebar-nav-item:not(.sidebar-nav-item-active):hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #cbd5e0;
+}
+
+.sidebar-nav-item-active {
+  background-color: rgba(20, 184, 166, 0.15);
+}
+
+.dark .sidebar-nav-item-active {
+  background-color: rgba(20, 184, 166, 0.2);
+}
+
+.sidebar-nav-item-active span:last-child {
+  @apply font-semibold;
+  color: #0d9488;
+}
+
+.dark .sidebar-nav-item-active span:last-child {
+  color: #2dd4bf;
+}
+
+.sidebar-nav-icon {
+  @apply flex items-center justify-center shrink-0 text-slate-500;
+}
+
+.sidebar-nav-icon-active {
+  @apply size-9 rounded-full flex items-center justify-center;
+  background-color: #14b8a6;
+  color: #ffffff !important;
+}
+
+.dashboard-row-3 {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-4;
+}
+
+.dashboard-body-card,
+.dashboard-weekly-card {
+  @apply rounded-2xl;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .dashboard-body-card,
+.dark .dashboard-weekly-card {
+  background-color: #0f1419;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+/* Body Metrics - nested metric cards */
+.body-metric-card {
+  @apply flex items-center justify-between p-4 rounded-xl;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .body-metric-card {
+  background-color: #141922;
+  border-color: transparent;
+}
+
+.body-metric-icon {
+  @apply size-10 rounded-lg flex items-center justify-center shrink-0;
+  background-color: #cbd5e1;
+  color: #475569;
+}
+
+.dark .body-metric-icon {
+  background-color: #1e293b;
+  color: #5eead4;
+}
+
+/* BMI bar segments - midnight blue (under), teal (normal), red (over) */
+.bmi-bar-under {
+  background-color: #0f172a;
+}
+
+.dark .bmi-bar-under {
+  background-color: #0f172a;
+}
+
+.bmi-bar-normal {
+  background-color: #14b8a6;
+}
+
+.bmi-bar-over {
+  background-color: #dc2626;
+}
+
+.dashboard-day-btn {
+  @apply flex-1 py-2 px-2 rounded-full text-xs font-medium transition-colors;
+  color: #94a3b8;
+  background: transparent;
+}
+
+.dashboard-day-btn:hover {
+  color: #5eead4;
+}
+
+.dashboard-day-btn-active {
+  background-color: #14b8a6;
+  color: #ffffff;
 }
 
 /* Profile Page */
-.profile-content {
-  @apply p-4 lg:p-6 space-y-4 lg:grid lg:grid-cols-2 lg:gap-6 lg:max-w-5xl lg:mx-auto;
+.profile-page {
+  @apply min-h-screen pb-24 transition-colors duration-200;
+  background-color: #f8fafc;
 }
 
-.profile-info-row {
-  @apply flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 
-  border border-slate-100 dark:border-slate-700/50 transition-all;
+.dark .profile-page {
+  background-color: #0a0e14;
 }
 
-/* Food Log & Activity Log Pages */
+.profile-shell {
+  @apply p-4 lg:p-6 w-full lg:max-w-7xl mx-auto space-y-5;
+}
+
+.profile-topbar {
+  @apply flex flex-col md:flex-row md:items-start md:justify-between gap-3;
+}
+
+.profile-title {
+  @apply text-3xl font-bold tracking-tight text-slate-800 dark:text-white;
+}
+
+.profile-subtitle {
+  @apply text-slate-500 dark:text-slate-400 mt-1;
+}
+
+.profile-last-login {
+  @apply text-sm px-4 py-2 rounded-full h-fit;
+  background-color: #141922;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+}
+
+.profile-layout {
+  @apply grid grid-cols-1 xl:grid-cols-12 gap-6;
+}
+
+.profile-main-card {
+  @apply xl:col-span-7 rounded-3xl p-6;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.profile-hero {
+  @apply flex items-center gap-5 mb-6;
+}
+
+.profile-avatar-wrap {
+  @apply relative;
+}
+
+.profile-avatar {
+  @apply size-16 rounded-2xl flex items-center justify-center;
+  background-color: #1e293b;
+}
+
+.profile-avatar-dot {
+  @apply absolute -right-1 -bottom-1 size-7 rounded-lg flex items-center justify-center;
+  background-color: #14b8a6;
+}
+
+.profile-name {
+  @apply text-4xl font-bold text-white leading-tight;
+}
+
+.profile-joined {
+  @apply mt-2 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+}
+
+.profile-stats-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+}
+
+.profile-stat-box {
+  @apply rounded-xl p-4 flex items-center gap-3;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+}
+
+.profile-stat-icon {
+  @apply size-9 rounded-lg flex items-center justify-center text-slate-300;
+  background-color: #1e293b;
+}
+
+.profile-stat-label {
+  @apply text-xs font-semibold uppercase tracking-wider text-slate-400;
+}
+
+.profile-stat-value {
+  @apply text-2xl font-bold text-white leading-tight;
+}
+
+.profile-edit-btn {
+  @apply w-full mt-6 py-3.5 rounded-xl font-semibold;
+  background-color: #14b8a6 !important;
+  color: #041014 !important;
+}
+
+.profile-edit-btn:hover {
+  background-color: #0d9488 !important;
+}
+
+.profile-form-title {
+  @apply text-2xl font-semibold text-white mb-4;
+}
+
+.profile-side {
+  @apply xl:col-span-5 space-y-4;
+}
+
+.profile-side-card {
+  @apply rounded-3xl p-5;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.profile-side-title {
+  @apply text-2xl font-semibold text-white mb-4 flex items-center gap-2;
+}
+
+.profile-side-title-dot {
+  @apply size-2.5 rounded-full;
+  background-color: #14b8a6;
+}
+
+.profile-side-stats {
+  @apply grid grid-cols-2 gap-3 mb-4;
+}
+
+.profile-side-stat {
+  @apply rounded-2xl p-5 text-center;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+}
+
+.profile-side-stat-value {
+  @apply text-6xl font-bold text-teal-400 leading-none;
+}
+
+.profile-side-stat-label {
+  @apply mt-3 text-xs uppercase tracking-wider text-slate-500;
+}
+
+.profile-goal-progress {
+  @apply rounded-xl p-4;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+  color: #cbd5e1;
+}
+
+.profile-progress-track {
+  @apply h-2 rounded-full overflow-hidden;
+  background-color: #1e293b;
+}
+
+.profile-progress-fill {
+  @apply h-full rounded-full;
+  background-color: #14b8a6;
+}
+
+.profile-insight-text {
+  @apply text-base italic text-slate-300 leading-relaxed;
+}
+
+.profile-side-divider {
+  @apply my-4 h-px;
+  background-color: #1e293b;
+}
+
+.profile-signout-btn {
+  @apply inline-flex items-center gap-2 font-semibold;
+  color: #f87171;
+}
+
+.profile-signout-btn:hover {
+  color: #ef4444;
+}
+
+.profile-account-mail {
+  @apply mt-5 text-[11px] tracking-[0.2em] text-slate-500;
+}
+
+/* Food Log Page */
+.food-log-page {
+  @apply min-h-screen pb-24 transition-colors duration-200;
+  background-color: #f8fafc;
+}
+
+.dark .food-log-page {
+  background-color: #0a0e14;
+}
+
+.food-log-content {
+  @apply p-4 lg:p-6 w-full lg:max-w-6xl mx-auto space-y-6;
+}
+
+.food-log-main {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-6;
+}
+
+.food-log-left {
+  @apply flex flex-col gap-6 lg:col-span-4 xl:col-span-4;
+}
+
+.food-log-right {
+  @apply flex flex-col gap-6 lg:col-span-8 xl:col-span-8;
+}
+
+.food-log-header {
+  @apply flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4;
+}
+
+.food-log-title {
+  @apply text-2xl lg:text-3xl font-bold tracking-tight text-slate-800;
+}
+
+.dark .food-log-title {
+  color: #ffffff;
+}
+
+.food-log-subtitle {
+  @apply text-sm text-slate-500 mt-1;
+}
+
+.dark .food-log-subtitle {
+  color: #94a3b8;
+}
+
+.food-log-total-label {
+  @apply text-xs font-medium uppercase tracking-wider text-slate-500;
+}
+
+.dark .food-log-total-label {
+  color: #94a3b8;
+}
+
+.food-log-total-value {
+  @apply text-xl font-bold tabular-nums;
+  color: #14b8a6;
+}
+
+.food-log-section-label {
+  @apply text-xs font-medium uppercase tracking-wider text-slate-500 mb-2;
+}
+
+.dark .food-log-section-label {
+  color: #94a3b8;
+}
+
+.food-log-panel {
+  @apply p-4 md:p-5 rounded-2xl;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .food-log-panel {
+  background-color: #141922;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.food-log-meal-pills {
+  @apply flex flex-wrap gap-2;
+}
+
+.food-log-meal-pill {
+  @apply flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all;
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.dark .food-log-meal-pill {
+  background-color: #1e293b;
+  color: #94a3b8;
+}
+
+.food-log-meal-pill:hover {
+  @apply bg-slate-200 dark:bg-slate-600/50;
+}
+
+.food-log-meal-pill-active {
+  background-color: #14b8a6;
+  color: #ffffff;
+}
+
+.dark .food-log-meal-pill-active {
+  background-color: #14b8a6;
+  color: #ffffff;
+}
+
+.food-log-actions {
+  @apply flex flex-col sm:flex-row gap-3;
+}
+
+.food-log-action-btn {
+  @apply flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium;
+  background-color: #14b8a6 !important;
+  color: #ffffff !important;
+}
+
+.food-log-action-btn:hover {
+  background-color: #0d9488 !important;
+}
+
+.food-log-entries {
+  @apply space-y-3;
+}
+
+.food-log-entry-card {
+  @apply flex items-center gap-4 p-4 rounded-xl transition-colors;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .food-log-entry-card {
+  background-color: #141922;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.food-log-entry-icon {
+  @apply size-12 rounded-xl flex items-center justify-center shrink-0;
+}
+
+.food-log-entry-content {
+  @apply flex-1 min-w-0;
+}
+
+.food-log-entry-right {
+  @apply text-right shrink-0;
+}
+
+.food-log-delete-btn {
+  @apply p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors;
+}
+
+.food-log-empty {
+  @apply p-8 rounded-xl text-center;
+  background-color: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+}
+
+.dark .food-log-empty {
+  background-color: #141922;
+  border-color: #334155;
+}
+
+.food-log-nutrient-card {
+  @apply p-4 rounded-xl;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .food-log-nutrient-card {
+  background-color: #141922;
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.food-log-nutrients {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+}
+
+/* Activity Log Page - Midnight & Teal */
+.activity-log-page {
+  @apply min-h-screen pb-24 transition-colors duration-200;
+  background-color: #f8fafc;
+}
+
+.dark .activity-log-page {
+  background-color: #0a0e14;
+}
+
+.activity-log-content {
+  @apply p-4 lg:p-6 w-full lg:max-w-7xl mx-auto;
+}
+
+.activity-log-layout {
+  @apply grid grid-cols-1 xl:grid-cols-12 gap-6;
+}
+
+.activity-log-main {
+  @apply xl:col-span-9 space-y-5;
+}
+
+.activity-log-side {
+  @apply hidden xl:block xl:col-span-3 rounded-2xl p-5 h-fit;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.activity-log-side h3 {
+  @apply text-lg font-semibold text-white mb-4;
+}
+
+.activity-log-header {
+  @apply flex items-start justify-between gap-4;
+}
+
+.activity-log-title {
+  @apply text-2xl lg:text-4xl font-bold tracking-tight text-slate-800 dark:text-white;
+}
+
+.activity-log-subtitle {
+  @apply text-xs font-semibold uppercase tracking-wider mt-1;
+  color: #14b8a6;
+}
+
+.activity-log-total-label {
+  @apply text-xs uppercase tracking-wider font-medium;
+  color: #64748b;
+}
+
+.activity-log-total-value {
+  @apply text-4xl font-bold tabular-nums;
+  color: #14b8a6;
+}
+
+.activity-log-quick-panel,
+.activity-log-form-panel {
+  @apply rounded-2xl p-5;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.activity-log-panel-label {
+  @apply text-xs font-semibold uppercase tracking-wider mb-3;
+  color: #64748b;
+}
+
+.activity-log-quick-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3;
+}
+
+.activity-log-quick-item {
+  @apply rounded-xl p-3 flex flex-col items-center gap-2 transition-colors;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+}
+
+.activity-log-quick-item:hover {
+  border-color: #14b8a6;
+}
+
+.activity-log-quick-emoji {
+  @apply size-10 rounded-full flex items-center justify-center text-base;
+  background-color: #020617;
+  border: 1px solid #134e4a;
+}
+
+.activity-log-quick-name {
+  @apply text-sm font-medium text-slate-300;
+}
+
+.activity-log-add-btn {
+  @apply w-full py-3.5 rounded-xl font-semibold text-slate-950;
+  background-color: #14b8a6 !important;
+}
+
+.activity-log-add-btn:hover {
+  background-color: #0d9488 !important;
+}
+
+.activity-log-today-header {
+  @apply flex items-center justify-between text-white pt-2;
+}
+
+.activity-log-today-header h3 {
+  @apply text-xl font-semibold;
+}
+
+.activity-log-today-header button {
+  @apply text-sm font-semibold;
+  color: #2dd4bf;
+}
+
+.activity-log-empty-panel {
+  @apply rounded-3xl p-10 text-center;
+  background-color: #141922;
+  border: 1px dashed #1e293b;
+}
+
+.activity-log-empty-icon {
+  @apply mx-auto mb-4 size-16 rounded-full flex items-center justify-center;
+  background-color: #020617;
+  border: 1px solid #134e4a;
+}
+
+.activity-log-empty-panel h4 {
+  @apply text-2xl font-semibold text-white mb-2;
+}
+
+.activity-log-empty-panel p {
+  @apply text-sm text-slate-400 max-w-md mx-auto;
+}
+
+.activity-log-empty-badges {
+  @apply mt-5 flex items-center justify-center gap-2;
+}
+
+.activity-log-empty-badges span {
+  @apply px-3 py-1 rounded-full text-xs font-medium;
+  background-color: #020617;
+  color: #94a3b8;
+  border: 1px solid #1e293b;
+}
+
+.activity-log-list {
+  @apply space-y-3;
+}
+
+.activity-log-item {
+  @apply flex items-center justify-between gap-4 rounded-xl p-4;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.activity-log-item-left {
+  @apply flex items-center gap-3;
+}
+
+.activity-log-item-icon {
+  @apply size-10 rounded-xl flex items-center justify-center;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+}
+
+.activity-log-item-name {
+  @apply font-medium text-white;
+}
+
+.activity-log-item-time {
+  @apply text-sm text-slate-400;
+}
+
+.activity-log-item-right {
+  @apply flex items-center gap-3;
+}
+
+.activity-log-item-duration {
+  @apply font-semibold text-white tabular-nums;
+}
+
+.activity-log-item-calories {
+  @apply text-xs text-slate-400 tabular-nums;
+}
+
+.activity-log-delete {
+  @apply p-2 rounded-lg text-slate-500 transition-colors;
+}
+
+.activity-log-delete:hover {
+  @apply text-red-400 bg-red-500/10;
+}
+
+.activity-log-metric-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+}
+
+.activity-log-metric-card {
+  @apply rounded-xl p-4;
+  background-color: #141922;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.activity-log-metric-top {
+  @apply flex items-center gap-2 text-sm text-slate-300 mb-3;
+}
+
+.activity-log-metric-value {
+  @apply text-4xl font-bold text-white tabular-nums;
+}
+
+.activity-log-metric-value small {
+  @apply text-lg font-medium text-slate-400;
+}
+
+.activity-log-metric-line {
+  @apply mt-3 h-1 rounded-full;
+  background-color: #1e293b;
+}
+
+.activity-log-side-goal {
+  @apply rounded-xl p-4 mb-4;
+  background-color: #0f1419;
+  border: 1px solid #1e293b;
+  color: #cbd5e1;
+}
+
+.activity-log-side-progress {
+  @apply h-2 rounded-full overflow-hidden;
+  background-color: #020617;
+}
+
+.activity-log-side-progress-fill {
+  @apply h-full rounded-full;
+  background-color: #14b8a6;
+}
+
+.activity-log-streak-card {
+  @apply rounded-xl p-4 mb-6;
+  background-color: #0f1419;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+}
+
+.activity-log-streak-label {
+  @apply text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2;
+}
+
+.activity-log-streak-value {
+  @apply text-3xl font-bold text-white leading-tight;
+}
+
+.activity-log-streak-note {
+  @apply text-xs text-slate-400 mt-1;
+}
+
+.activity-log-side-milestones {
+  @apply space-y-3;
+}
+
+.activity-log-milestone {
+  @apply flex items-start gap-2;
+}
+
+.activity-log-milestone p {
+  @apply text-sm font-medium text-slate-300;
+}
+
+.activity-log-milestone span {
+  @apply text-xs text-slate-500;
+}
+
+/* Activity Log (shared) */
 .page-header-accent {
   @apply bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 p-6 pt-12 transition-colors duration-200;
 }
@@ -113,7 +1008,7 @@ body{
 
 /* Onboarding Page */
 .onboarding-container {
-  @apply min-h-screen bg-gradient-to-b from-slate-50 via-emerald-50/40 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex flex-col transition-colors duration-200;
+  @apply min-h-screen bg-gradient-to-b from-slate-50 via-teal-50/40 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex flex-col transition-colors duration-200;
 }
 
 .onboarding-wrapper {
@@ -129,7 +1024,7 @@ body{
 }
 
 .onboarding-progress-fill {
-  @apply h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500;
+  @apply h-full rounded-full bg-gradient-to-r from-teal-500 to-teal-400 transition-all duration-500;
 }
 
 .onboarding-step-card {
@@ -138,12 +1033,392 @@ body{
 
 .onboarding-option-btn {
   @apply w-full p-4 pl-5 rounded-2xl border-2 text-left border-slate-200 dark:border-slate-700 
-  bg-white dark:bg-slate-800/50 hover:border-emerald-300 dark:hover:border-emerald-600/50 
-  hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 
+  bg-white dark:bg-slate-800/50 hover:border-teal-300 dark:hover:border-teal-600/50 
+  hover:bg-teal-50/50 dark:hover:bg-teal-900/10 
   transition-all duration-200 cursor-pointer active:scale-[0.99];
 }
 
 .onboarding-option-btn.selected {
-  @apply border-emerald-500 dark:border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 
-  ring-2 ring-emerald-500/30 dark:ring-emerald-400/30;
+  @apply border-teal-500 dark:border-teal-400 bg-teal-50 dark:bg-teal-900/20 
+  ring-2 ring-teal-500/30 dark:ring-teal-400/30;
+}
+
+/* -------------------------------------------------------
+   Light Mode Palette Overrides (colors only)
+   ------------------------------------------------------- */
+html:not(.dark) body {
+  background-color: #e8edf1;
+  color: #253247;
+}
+
+html:not(.dark) .layout-container {
+  background-color: #e8edf1;
+}
+
+html:not(.dark) .sidebar-nav {
+  background-color: #dfe5ea;
+  border-color: #cfd7df;
+}
+
+html:not(.dark) .sidebar-nav-item:not(.sidebar-nav-item-active) {
+  color: #5f7187;
+}
+
+html:not(.dark) .sidebar-nav-item:not(.sidebar-nav-item-active):hover {
+  background-color: #e9edf2;
+  color: #33455d;
+}
+
+html:not(.dark) .sidebar-nav-item-active {
+  background-color: #d4ece9;
+}
+
+html:not(.dark) .sidebar-nav-item-active span:last-child {
+  color: #16a69a;
+}
+
+html:not(.dark) .dashboard-page,
+html:not(.dark) .food-log-page,
+html:not(.dark) .activity-log-page,
+html:not(.dark) .profile-page {
+  background-color: #e8edf1;
+}
+
+html:not(.dark) .welcome-section,
+html:not(.dark) .welcome-goal-card,
+html:not(.dark) .dashboard-nutrition-card,
+html:not(.dark) .dashboard-stat-card,
+html:not(.dark) .dashboard-body-card,
+html:not(.dark) .dashboard-weekly-card,
+html:not(.dark) .food-log-panel,
+html:not(.dark) .food-log-entry-card,
+html:not(.dark) .food-log-nutrient-card,
+html:not(.dark) .activity-log-quick-panel,
+html:not(.dark) .activity-log-form-panel,
+html:not(.dark) .activity-log-item,
+html:not(.dark) .activity-log-metric-card,
+html:not(.dark) .activity-log-side,
+html:not(.dark) .activity-log-side-goal,
+html:not(.dark) .activity-log-streak-card,
+html:not(.dark) .profile-main-card,
+html:not(.dark) .profile-side-card,
+html:not(.dark) .profile-side-stat,
+html:not(.dark) .profile-goal-progress,
+html:not(.dark) .profile-last-login {
+  background-color: #f7f9fb;
+  border-color: #d7e0e8;
+}
+
+html:not(.dark) .activity-log-quick-item,
+html:not(.dark) .activity-log-empty-badges span,
+html:not(.dark) .profile-stat-box,
+html:not(.dark) .profile-joined {
+  background-color: #eef3f6;
+  border-color: #d7e0e8;
+}
+
+html:not(.dark) .activity-log-quick-emoji,
+html:not(.dark) .activity-log-empty-icon,
+html:not(.dark) .activity-log-item-icon,
+html:not(.dark) .profile-avatar,
+html:not(.dark) .profile-stat-icon {
+  background-color: #e7edf2;
+  border-color: #cfd8e2;
+}
+
+html:not(.dark) .activity-log-title,
+html:not(.dark) .profile-title,
+html:not(.dark) .profile-name,
+html:not(.dark) .activity-log-empty-panel h4,
+html:not(.dark) .activity-log-today-header,
+html:not(.dark) .activity-log-item-name,
+html:not(.dark) .activity-log-item-duration,
+html:not(.dark) .profile-stat-value,
+html:not(.dark) .profile-side-title {
+  color: #243247;
+}
+
+html:not(.dark) .activity-log-subtitle,
+html:not(.dark) .activity-log-total-value,
+html:not(.dark) .food-log-total-value,
+html:not(.dark) .dashboard-accent,
+html:not(.dark) .profile-side-stat-value,
+html:not(.dark) .profile-side-title-dot {
+  color: #18b3a5;
+}
+
+html:not(.dark) .activity-log-side-progress,
+html:not(.dark) .profile-progress-track,
+html:not(.dark) .activity-log-metric-line {
+  background-color: #dfe6ee;
+}
+
+html:not(.dark) .activity-log-side-progress-fill,
+html:not(.dark) .profile-progress-fill {
+  background-color: #1cb7ab;
+}
+
+html:not(.dark) .activity-log-empty-panel,
+html:not(.dark) .food-log-empty {
+  background-color: #f4f8fb;
+  border-color: #d6dfe8;
+}
+
+html:not(.dark) .login-page-container {
+  background: #dbe4e8;
+}
+
+html:not(.dark) .login-card {
+  background-color: #f8fafc;
+  border-color: #d7e0e8;
+}
+
+/* Activity page fine-tune for light reference */
+html:not(.dark) .activity-log-page {
+  background-color: #e9edf1;
+}
+
+html:not(.dark) .activity-log-main {
+  color: #243247;
+}
+
+html:not(.dark) .activity-log-side {
+  background-color: #eef2f6;
+  border-color: #d6dee6;
+}
+
+html:not(.dark) .activity-log-side h3 {
+  color: #1f2d3d;
+}
+
+html:not(.dark) .activity-log-quick-panel,
+html:not(.dark) .activity-log-form-panel,
+html:not(.dark) .activity-log-empty-panel,
+html:not(.dark) .activity-log-item,
+html:not(.dark) .activity-log-metric-card,
+html:not(.dark) .activity-log-side-goal,
+html:not(.dark) .activity-log-streak-card {
+  background-color: #f7f9fb;
+  border-color: #d7dfe7;
+}
+
+html:not(.dark) .activity-log-panel-label,
+html:not(.dark) .activity-log-total-label {
+  color: #8a9aab;
+}
+
+html:not(.dark) .activity-log-title,
+html:not(.dark) .activity-log-today-header,
+html:not(.dark) .activity-log-item-name,
+html:not(.dark) .activity-log-item-duration {
+  color: #253247;
+}
+
+html:not(.dark) .activity-log-item-time,
+html:not(.dark) .activity-log-item-calories,
+html:not(.dark) .activity-log-streak-note,
+html:not(.dark) .activity-log-milestone span,
+html:not(.dark) .activity-log-empty-panel p {
+  color: #8797a8;
+}
+
+html:not(.dark) .activity-log-streak-label {
+  color: #253247;
+}
+
+html:not(.dark) .activity-log-streak-value {
+  color: #111827;
+}
+
+html:not(.dark) .activity-log-quick-item {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+html:not(.dark) .activity-log-quick-item:hover {
+  background-color: #f1f5f8;
+  border-color: #d7dfe7;
+}
+
+html:not(.dark) .activity-log-quick-emoji {
+  background-color: #c8efe9;
+  border-color: transparent;
+}
+
+html:not(.dark) .activity-log-quick-name {
+  color: #4b5d73;
+}
+
+html:not(.dark) .activity-log-add-btn {
+  background-color: #1aa39a !important;
+  color: #ffffff !important;
+}
+
+html:not(.dark) .activity-log-add-btn:hover {
+  background-color: #168f88 !important;
+}
+
+html:not(.dark) .activity-log-today-header button,
+html:not(.dark) .activity-log-total-value,
+html:not(.dark) .activity-log-subtitle {
+  color: #18a89c;
+}
+
+html:not(.dark) .activity-log-empty-icon,
+html:not(.dark) .activity-log-item-icon {
+  background-color: #eef3f7;
+  border-color: #d7dfe7;
+}
+
+html:not(.dark) .activity-log-empty-badges span {
+  background-color: #ffffff;
+  border-color: #d8e0e8;
+  color: #7e8ea0;
+}
+
+html:not(.dark) .activity-log-metric-top {
+  color: #41546b;
+}
+
+html:not(.dark) .activity-log-metric-value {
+  color: #253247;
+}
+
+html:not(.dark) .activity-log-metric-value small {
+  color: #8da0b2;
+}
+
+html:not(.dark) .activity-log-metric-line,
+html:not(.dark) .activity-log-side-progress,
+html:not(.dark) .profile-progress-track {
+  background-color: #dfe6ee;
+}
+
+html:not(.dark) .activity-log-side-progress-fill {
+  background-color: #20b4a8;
+}
+
+/* Profile page fine-tune for light reference */
+html:not(.dark) .profile-page {
+  background-color: #e9edf1;
+}
+
+html:not(.dark) .profile-title {
+  color: #1f2b3d;
+}
+
+html:not(.dark) .profile-subtitle {
+  color: #6f8197;
+}
+
+html:not(.dark) .profile-last-login {
+  background-color: #f7f9fb;
+  border-color: #d7dfe7;
+  color: #7c8ea3;
+}
+
+html:not(.dark) .profile-main-card,
+html:not(.dark) .profile-side-card {
+  background-color: #f7f9fb;
+  border-color: #d7dfe7;
+}
+
+html:not(.dark) .profile-avatar {
+  background-color: #eef2f6;
+}
+
+html:not(.dark) .profile-avatar-dot {
+  background-color: #1cb7ab;
+}
+
+html:not(.dark) .profile-name {
+  color: #202e42;
+}
+
+html:not(.dark) .profile-joined {
+  background-color: #eef3f7;
+  border-color: #d8e0e8;
+  color: #7d8fa4;
+}
+
+html:not(.dark) .profile-stat-box {
+  background-color: #f2f6f9;
+  border-color: #dce4eb;
+}
+
+html:not(.dark) .profile-stat-icon {
+  background-color: #edf2f6;
+  color: #93a4b5;
+}
+
+html:not(.dark) .profile-stat-label {
+  color: #8d9caf;
+}
+
+html:not(.dark) .profile-stat-value {
+  color: #263448;
+}
+
+html:not(.dark) .profile-edit-btn {
+  background-color: #1cb7ab !important;
+  color: #ffffff !important;
+}
+
+html:not(.dark) .profile-edit-btn:hover {
+  background-color: #17a196 !important;
+}
+
+html:not(.dark) .profile-side-title {
+  color: #263448;
+}
+
+html:not(.dark) .profile-side-title-dot {
+  background-color: #1cb7ab;
+}
+
+html:not(.dark) .profile-side-stat {
+  background-color: #f4f7fa;
+  border-color: #dce4eb;
+}
+
+html:not(.dark) .profile-side-stat-value {
+  color: #1aaea2;
+}
+
+html:not(.dark) .profile-side-stat-label {
+  color: #8b9bae;
+}
+
+html:not(.dark) .profile-goal-progress {
+  background-color: #f3f7fa;
+  border-color: #dce4eb;
+  color: #495d73;
+}
+
+html:not(.dark) .profile-progress-track {
+  background-color: #dfe6ee;
+}
+
+html:not(.dark) .profile-progress-fill {
+  background-color: #1cb7ab;
+}
+
+html:not(.dark) .profile-insight-text {
+  color: #7c8ea3;
+}
+
+html:not(.dark) .profile-side-divider {
+  background-color: #dee6ed;
+}
+
+html:not(.dark) .profile-signout-btn {
+  color: #ef4b61;
+}
+
+html:not(.dark) .profile-signout-btn:hover {
+  color: #dc3d52;
+}
+
+html:not(.dark) .profile-account-mail {
+  color: #9baabd;
 }

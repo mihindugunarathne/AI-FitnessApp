@@ -26,23 +26,23 @@ const Slider: React.FC<SliderProps> = ({ label, min = 0, max = 100, step = 1, va
                         <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</label>
                         {infoText && (
                             <Tooltip content={infoText}>
-                                <Info className="size-4 text-slate-400 hover:text-emerald-500 cursor-help transition-colors" />
+                                <Info className="size-4 text-slate-400 hover:text-teal-500 cursor-help transition-colors" />
                             </Tooltip>
                         )}
                     </div>
-                    <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                    <span className="text-sm font-semibold text-teal-600 dark:text-teal-400">
                         {value} {unit}
                     </span>
                 </div>
             )}
             <div className="relative w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full cursor-pointer">
                 {/* Track fill */}
-                <div className="absolute top-0 left-0 h-full bg-emerald-500 rounded-full" style={{ width: `${percentage}%` }} />
+                <div className="absolute top-0 left-0 h-full bg-teal-500 rounded-full" style={{ width: `${percentage}%` }} />
 
                 {/* Thumb input */}
                 <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} className="absolute w-full h-full opacity-0 cursor-pointer z-10" />
 
-                <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-emerald-500 rounded-full shadow-md pointer-events-none transition-transform duration-75 ease-out" style={{ left: `calc(${percentage}% - 8px)` }} />
+                <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-teal-500 rounded-full shadow-md pointer-events-none transition-transform duration-75 ease-out" style={{ left: `calc(${percentage}% - 8px)` }} />
             </div>
         </div>
     );

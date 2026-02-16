@@ -29,7 +29,7 @@ export default function Select({ label, value, onChange, options = [], className
                 <select
                     value={value}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
-                    className='w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 cursor-pointer'
+                    className='w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 cursor-pointer'
                 >
                     <option value='' disabled>
                         {placeholder}

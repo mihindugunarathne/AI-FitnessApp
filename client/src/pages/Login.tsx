@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AtSignIcon, EyeOffIcon } from "lucide-react"
+import { AtSignIcon, EyeOffIcon, ZapIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";  
 import { useEffect } from "react";
@@ -44,8 +44,8 @@ const Login = () => {
         <div className="login-card">
           {/* Brand */}
           <div className="flex items-center gap-3 mb-8">
-            <div className="size-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-              <span className="text-2xl">💪</span>
+            <div className="size-12 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30">
+              <ZapIcon className="size-5 text-white" strokeWidth={2.5} />
             </div>
             <div>
               <h1 className="text-xl font-bold text-slate-800 dark:text-white">FitTrack</h1>
@@ -105,14 +105,14 @@ const Login = () => {
               {state === 'login' ? (
                 <p className="text-sm text-center text-slate-500 dark:text-slate-400">
                   Don&apos;t have an account?{" "}
-                  <button type="button" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline" onClick={() => setState('sign up')}>
+                  <button type="button" className="text-teal-600 dark:text-teal-400 font-semibold hover:underline" onClick={() => setState('sign up')}>
                     Sign up
                   </button>
                 </p>
               ) : (
                 <p className="text-sm text-center text-slate-500 dark:text-slate-400">
                   Already have an account?{" "}
-                  <button type="button" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline" onClick={() => setState('login')}>
+                  <button type="button" className="text-teal-600 dark:text-teal-400 font-semibold hover:underline" onClick={() => setState('login')}>
                     Sign in
                   </button>
                 </p>

@@ -1,15 +1,32 @@
-export default function ProgressBar({ value, max = 100, className = '' }: { value: number; max?: number; className?: string }) {
-    const percentage = Math.min(Math.round((value / max) * 100), 100);
-    const isOverLimit = value > max;
+export default function ProgressBar({
+  value,
+  max = 100,
+  variant = "teal",
+  className = "",
+}: {
+  value: number
+  max?: number
+  variant?: "teal" | "muted"
+  className?: string
+}) {
+  const percentage = Math.min(Math.round((value / max) * 100), 100)
+  const isOverLimit = value > max
 
-    return (
-        <div className={className}>
-            <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                <div
-                    className={`h-full rounded-full transition-all duration-500 ease-out ${isOverLimit ? 'bg-red-500' : 'bg-gradient-to-r from-emerald-500 to-teal-500'}`}
-                    style={{ width: `${percentage}%` }}
-                />
-            </div>
-        </div>
-    );
+  const fillClass =
+    isOverLimit
+      ? "bg-red-500"
+      : variant === "muted"
+        ? "bg-teal-700"
+        : "bg-[#14b8a6]"
+
+  return (
+    <div className={className}>
+      <div className="w-full h-2.5 bg-slate-200 dark:bg-[#1e293b] rounded-full overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ease-out ${fillClass}`}
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
+    </div>
+  )
 }
